@@ -103,7 +103,7 @@ option(Slicer_BUILD_CompareVolumes              "Build application with ChangeTr
 option(Slicer_BUILD_LandmarkRegistration        "Build application with LandmarkRegistration module"  OFF)
 
 # Addition Slicer dependencies
-set(Slicer_ADDITIONAL_DEPENDENCIES
+set(Slicer_ADDITIONAL_DEPENDENCIES 
   )
 
 # Enable Slicer built-in modules
@@ -396,7 +396,21 @@ list(APPEND Slicer_EXTENSION_SOURCE_DIRS ${${extension_name}_SOURCE_DIR})
 #-----------------------------------------------------------------------------
 # Elastix
 
-list(APPEND Slicer_ADDITIONAL_DEPENDENCIES elastix)
+#list(APPEND Slicer_ADDITIONAL_DEPENDENCIES elastix)
+set(SlicerElastix_BUILD_TESTING OFF)
+mark_as_superbuild(SlicerElastix_BUILD_TESTING:BOOL)
+
+set(extension_name "SlicerElastix")
+set(${extension_name}_EXTERNAL_PROJECT_EXCLUDE_ALL TRUE)
+set(${extension_name}_SOURCE_DIR "${CMAKE_BINARY_DIR}/${extension_name}")
+FetchContent_Populate(${extension_name}
+	SOURCE_DIR	${${extension_name}_SOURCE_DIR}
+	GIT_REPOSITORY	${EP_GIT_PROTOCOL}://github.com/lassoan/${extension_name}
+	GIT_TAG 	cea01c993601af4b6e3ac27b8763cfd06032b359
+	GIT_PROGRESS	1
+	QUIET
+	)
+list(APPEND Slicer_EXTENSION_SOURCE_DIRS ${${extension_name}_SOURCE_DIR})
 
 #-----------------------------------------------------------------------------
 # Add Slicer sources

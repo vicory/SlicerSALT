@@ -1,7 +1,7 @@
 set(proj elastix)
 set(ep_common_cxx_flags "${CMAKE_CXX_FLAGS_INIT} ${ADDITIONAL_CXX_FLAGS}")
 # Set dependency list
-set(${proj}_DEPENDS "")
+set(${proj}_DEPENDS "ITK")
 
 # Include dependent projects if any
 ExternalProject_Include_Dependencies(${proj} PROJECT_VAR proj)
